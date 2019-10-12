@@ -1,0 +1,38 @@
+{
+  "name": "swagger-typescript-codegen-cli",
+  "version": "0.0.1",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "swagger-typescript-codegen-cli": "./build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agreatfool/swagger-typescript-codegen-cli.git"
+  },
+  "author": "Jonathan Dai",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/agreatfool/swagger-typescript-codegen-cli/issues"
+  },
+  "homepage": "https://github.com/agreatfool/swagger-typescript-codegen-cli#readme",
+  "dependencies": {
+    "commander": "3.0.2",
+    "is-url": "1.2.4",
+    "mkdirp": "0.5.1",
+    "node-fetch": "2.6.0",
+    "swagger-js-codegen": "1.13.0",
+    "swagger-typescript-codegen": "3.0.1",
+    "yaml": "1.7.1"
+  },
+  "devDependencies": {
+    "@types/is-url": "1.2.28",
+    "@types/mkdirp": "0.5.2",
+    "@types/node": "12.7.12",
+    "@types/node-fetch": "2.5.2",
+    "@types/yaml": "1.2.0"
+  }
+}

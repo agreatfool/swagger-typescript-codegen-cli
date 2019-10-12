@@ -13,6 +13,14 @@
     "type": "git",
     "url": "git+https://github.com/agreatfool/swagger-typescript-codegen-cli.git"
   },
+  "keywords": [
+    "swagger",
+    "openapi",
+    "swagger-typescript-codegen",
+    "typescript",
+    "rest",
+    "restful"
+  ],
   "author": "Jonathan Dai",
   "license": "Apache-2.0",
   "bugs": {

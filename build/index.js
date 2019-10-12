@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -19,11 +20,15 @@ const CodeGen = require("swagger-typescript-codegen").CodeGen;
 const pkg = require("../package.json");
 program.version(pkg.version)
     .description("Download|Read provided swagger json|yml, and generate client typescript api codes.")
-    .option("-s, --source <string>", "swagger spec source")
-    .option("-o, --output <string>", "codes output path")
+    .option("-s, --source <string>", "swagger spec source, could be a URL string or local file path string")
+    .option("-o, --output <string>", "codes output path, would be made if does not exist")
+    .option("-c, --class-name <string>", "class name to generate, default: Api")
+    .option("-f, --file-name <string>", "file name to generate, default: api.ts")
     .parse(process.argv);
 const ARGS_SOURCE = program.source === undefined ? undefined : program.source;
 const ARGS_OUTPUT = program.output === undefined ? undefined : program.output;
+const ARGS_CLASS = program.className === undefined ? "Api" : program.className;
+const ARGS_FILE = program.fileName === undefined ? "api.ts" : program.fileName;
 let IS_SOURCE_URL = false;
 let SPEC = ""; // swagger spec
 class Generator {
@@ -87,6 +92,7 @@ class Generator {
     }
     _process() {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("Processing ...");
             yield this._processSource();
             yield this._processOutput();
         });
@@ -130,14 +136,14 @@ class Generator {
     _processOutput() {
         return __awaiter(this, void 0, void 0, function* () {
             const tsSourceCode = CodeGen.getTypescriptCode({
-                className: "Api",
+                className: ARGS_CLASS,
                 swagger: SPEC,
                 template: {
                     // build/index.js => build/../../src/templates/class.mustache
                     class: LibFs.readFileSync(LibPath.join(__dirname, "..", "src", "templates", "class.mustache"), "utf-8"),
                 },
             });
-            LibFs.writeFileSync(LibPath.join(ARGS_OUTPUT, "api.ts"), tsSourceCode);
+            LibFs.writeFileSync(LibPath.join(ARGS_OUTPUT, ARGS_FILE), tsSourceCode);
         });
     }
 }

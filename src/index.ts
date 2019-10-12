@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as LibFs from "fs";
 import * as LibPath from "path";
 

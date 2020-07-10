@@ -815,10 +815,10 @@ swagger-js-codegen@1.13.0:
     mustache "2.2.1"
     update-notifier "^2.1.0"
 
-swagger-typescript-codegen@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/swagger-typescript-codegen/-/swagger-typescript-codegen-3.0.1.tgz#0991b99acdf87764d178b41b946f0520a9ba1433"
-  integrity sha512-mg+5iB9ieM/WQGjjFRLhHxiRUNR427IUzsTnC5GsK5mBV3D4nwAO5EkhK11a75pVTPBtuGRlGViSoUIsmpUKxA==
+swagger-typescript-codegen@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/swagger-typescript-codegen/-/swagger-typescript-codegen-3.1.0.tgz#6efb7060ea103058ba5e1bdbc74d55d07aefcf9b"
+  integrity sha512-/x52lwwm3FOHVVKZQsITMGTHyM8gLDNX8Nox+uoK3tXikn9ZA/6yDImmTWunxInEdnfraUcpr/hjC0q2YUcQZQ==
   dependencies:
     commander "^2.19.0"
     js-beautify "^1.8.9"

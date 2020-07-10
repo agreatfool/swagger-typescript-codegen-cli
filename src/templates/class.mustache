@@ -86,8 +86,8 @@ export class {{&className}} {
         }
 
         const agent = this.configureAgentHandler
-            ? this.configureAgentHandler(request)
-            : request;
+            ? this.configureAgentHandler(request.default)
+            : request.default;
 
         let req = agent(method, url);
         if (this.configureRequestHandler) {
@@ -96,11 +96,17 @@ export class {{&className}} {
      
         req = req.query(queryParameters);
 
+        if (this.requestHeadersHandler) {
+            headers = this.requestHeadersHandler({...headers});
+        }
+
+        req.set(headers);
+
         if(body) {
             req.send(body);
         
             if(typeof(body) === 'object' && !(body.constructor.name === 'Buffer')) {
-                headers['Content-Type'] = 'application/json';
+                headers['content-type'] = 'application/json';
             }
         }
 
@@ -108,12 +114,6 @@ export class {{&className}} {
             req.type('form');
             req.send(form);
         }
-
-        if (this.requestHeadersHandler) {
-            headers = this.requestHeadersHandler({...headers});
-        }
-
-        req.set(headers);
 
         if (opts.$retries && opts.$retries > 0) {
             req.retry(opts.$retries);
@@ -134,6 +134,25 @@ export class {{&className}} {
                 resolve(response);
             }
         });
+    }
+
+    private convertParameterCollectionFormat < T > (param: T, collectionFormat: string | undefined): T | string {
+        if (Array.isArray(param) && param.length >= 2) {
+            switch (collectionFormat) {
+                case "csv":
+                    return param.join(",");
+                case "ssv":
+                    return param.join(" ");
+                case "tsv":
+                    return param.join("\t");
+                case "pipes":
+                    return param.join("|");
+                default:
+                    return param;
+            }
+        }
+
+        return param;
     }
 
 {{#methods}}
